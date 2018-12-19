@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.OptionalLong;
 import java.util.stream.Collectors;
@@ -138,7 +139,8 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 
 			return jogadorRepositorio.mostraLista()
 										.stream()
-										.filter(jogador -> jogador.getIdTime() == idTime && jogador.getNivelHabilidade() == maior)
+										.filter(jogador -> jogador.getIdTime() == idTime &&
+														   jogador.getNivelHabilidade() == maior)
 										.mapToLong(Jogador::getId)
 										.boxed()
 										.findFirst()
@@ -180,6 +182,7 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 			return timeRepositorio.mostraLista()
 									.stream()
 									.mapToLong(Time::getId)
+									.sorted()
 									.boxed()
 									.collect(Collectors.toList());
 		}
@@ -188,12 +191,38 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 
 	@Desafio("buscarJogadorMaiorSalario")
 	public Long buscarJogadorMaiorSalario(Long idTime) {
-		throw new UnsupportedOperationException();
+		if(timeRepositorio.timeExistente(idTime)){
+			BigDecimal maiorSalario = jogadorRepositorio.mostraLista()
+														.stream()
+														.filter(jogador -> jogador.getIdTime() == idTime)
+														.map(Jogador::getSalario)
+														.max(Comparator.comparingDouble(BigDecimal::doubleValue))
+														.get();
+
+			return jogadorRepositorio.mostraLista()
+										.stream()
+										.filter(jogador -> jogador.getIdTime() == idTime &&
+														   jogador.getSalario() == maiorSalario)
+										.mapToLong(Jogador::getId)
+										.findAny()
+										.getAsLong();
+		}else{
+			throw new TimeNaoEncontradoException("Time não encontrado!");
+		}
 	}
 
 	@Desafio("buscarSalarioDoJogador")
 	public BigDecimal buscarSalarioDoJogador(Long idJogador) {
-		throw new UnsupportedOperationException();
+		if(jogadorRepositorio.jogadorExistente(idJogador)){
+			return jogadorRepositorio.mostraLista()
+										.stream()
+										.filter(jogador -> jogador.getId() == idJogador)
+										.map(Jogador::getSalario)
+										.findFirst()
+										.get();					
+		}else{
+			throw new JogadorNaoEncontradoException("Jogador não encontrado");
+		}
 	}
 
 	@Desafio("buscarTopJogadores")
