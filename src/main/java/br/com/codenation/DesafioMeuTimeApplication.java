@@ -3,15 +3,29 @@ package br.com.codenation;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.OptionalLong;
+import java.util.stream.LongStream;
 
 import br.com.codenation.desafio.annotation.Desafio;
 import br.com.codenation.desafio.app.MeuTimeInterface;
+import br.com.codenation.desafio.exceptions.CapitaoNaoInformadoException;
+import br.com.codenation.desafio.exceptions.JogadorNaoEncontradoException;
+import br.com.codenation.desafio.exceptions.TimeNaoEncontradoException;
 import br.com.codenation.model.*;
 import br.com.codenation.negocio.*;
+import br.com.codenation.repositorio.*;
 
 public class DesafioMeuTimeApplication implements MeuTimeInterface {
 	TimeNegocio timeNegocio = new TimeNegocio();
 	JogadorNegocio jogadorNegocio = new JogadorNegocio();
+
+	private TimeRepositorio timeRepositorio;
+	private JogadorRepositorio jogadorRepositorio;
+
+	public DesafioMeuTimeApplication(TimeRepositorio timeRepositorio, JogadorRepositorio jogadorRepositorio){
+		this.timeRepositorio = timeRepositorio;
+		this.jogadorRepositorio = jogadorRepositorio;
+	}
 
 
 	@Desafio("incluirTime")
@@ -34,12 +48,42 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 
 	@Desafio("definirCapitao")
 	public void definirCapitao(Long idJogador) {
-		throw new UnsupportedOperationException();
+		boolean validador = jogadorRepositorio.mostraLista()
+												.stream()
+												.anyMatch(j -> j.getId() == idJogador);
+
+		if(validador){
+			jogadorRepositorio.mostraLista()
+								.stream()
+								.filter(jogador -> jogador.getCapitao() == true)
+								.peek(jogador -> jogador.setCapitao(false))
+								.filter(jogador -> jogador.getId() == idJogador)
+								.peek(jogador -> jogador.setCapitao(true));
+		}else{
+			throw new JogadorNaoEncontradoException("Jogador não encontrado!");
+		}
 	}
 
 	@Desafio("buscarCapitaoDoTime")
 	public Long buscarCapitaoDoTime(Long idTime) {
-		throw new UnsupportedOperationException();
+		OptionalLong idJogador;
+
+		if(timeRepositorio.timeExistente(idTime)){
+			idJogador = jogadorRepositorio.mostraLista()
+											.stream()
+											.filter(jogador -> jogador.getIdTime() == idTime && jogador.getCapitao() == true)
+											.mapToLong(Jogador::getId)
+											.findAny();
+
+			if(idJogador.isPresent()){
+				return idJogador.getAsLong();
+			}else{
+				throw new CapitaoNaoInformadoException("Capitão não informado!");
+			}
+
+		}else{
+			throw new TimeNaoEncontradoException("Time inexistente!");
+		}
 	}
 
 	@Desafio("buscarNomeJogador")

@@ -6,13 +6,13 @@ import br.com.codenation.repositorio.TimeRepositorio;
 
 public class TimeNegocio{
     public void salvar(Time t) throws Exception{
-        this.validarTimeExistente(t);
+        this.validarTimeExistente(t.getId());
         this.validarCamposObrigatorios(t);
         TimeRepositorio.getInstance().add(t);
     }
 
-    private void validarTimeExistente(Time t) {
-        if(TimeRepositorio.getInstance().timeExistente(t.getId())){
+    private void validarTimeExistente(Long id) {
+        if(TimeRepositorio.getInstance().timeExistente(id)){
             throw new IdentificadorUtilizadoException("Identificador do time inexistente!");
         }
     }

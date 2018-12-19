@@ -26,4 +26,8 @@ public class JogadorRepositorio {
         return jogadores.stream()
                         .anyMatch(j -> j.getId() == id);
     }
+
+    public List<Jogador> mostraLista(){
+        return jogadores;
+    }
 }

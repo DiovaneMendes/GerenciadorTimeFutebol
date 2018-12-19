@@ -9,6 +9,10 @@ public class Time {
     private String corUniformePrincipal;
     private String corUniformeSecundario;
 
+    public Time(){
+
+    }
+
     public Time(Long id, String nome, LocalDate dataCriacao, String corUniformePrincipal, String corUniformeSecundario){
         this.id = id;
         this.nome = nome;

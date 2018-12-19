@@ -10,20 +10,20 @@ import java.time.Period;
 public class JogadorNegocio {
 
     public void salvar(Jogador j) throws Exception{
-        this.validarJogadorExistente(j);
-        this.validarTimeExistente(j);
+        this.validarJogadorExistente(j.getId());
+        this.validarTimeExistente(j.getIdTime());
         this.validarCamposObrigatorios(j);
         JogadorRepositorio.getInstance().add(j);
     }
 
-    private void validarJogadorExistente(Jogador j) throws IdentificadorUtilizadoException{
-        if(JogadorRepositorio.getInstance().jogadorExistente(j.getId())){
+    private void validarJogadorExistente(Long id) throws IdentificadorUtilizadoException{
+        if(JogadorRepositorio.getInstance().jogadorExistente(id)){
             throw new IdentificadorUtilizadoException("Identificador jogador existente!");
         }
     }
 
-    private void validarTimeExistente(Jogador j) throws IdentificadorUtilizadoException{
-        if(TimeRepositorio.getInstance().timeExistente(j.getIdTime())){
+    private void validarTimeExistente(Long id) throws IdentificadorUtilizadoException{
+        if(TimeRepositorio.getInstance().timeExistente(id)){
             throw new IdentificadorUtilizadoException("Time inexistente!");
         }
     }
