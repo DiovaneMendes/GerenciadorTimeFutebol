@@ -26,4 +26,8 @@ public class TimeRepositorio {
         return times.stream()
                     .anyMatch(j -> j.getId() == id);
     }
+
+    public List<Time> mostraLista(){
+        return times;
+    }
 }

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.OptionalLong;
-import java.util.stream.LongStream;
 
 import br.com.codenation.desafio.annotation.Desafio;
 import br.com.codenation.desafio.app.MeuTimeInterface;
@@ -88,12 +87,30 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 
 	@Desafio("buscarNomeJogador")
 	public String buscarNomeJogador(Long idJogador) {
-		throw new UnsupportedOperationException();
+		if(jogadorRepositorio.jogadorExistente(idJogador)){
+			return jogadorRepositorio.mostraLista()
+										.stream()
+										.filter(jogador -> jogador.getId() == idJogador)
+										.map(Jogador::getNome)
+										.findFirst()
+										.get();
+		}else{
+			throw new JogadorNaoEncontradoException("Jogador não encontrado!");
+		}
 	}
 
 	@Desafio("buscarNomeTime")
 	public String buscarNomeTime(Long idTime) {
-		throw new UnsupportedOperationException();
+		if(timeRepositorio.timeExistente(idTime)){
+			return timeRepositorio.mostraLista()
+									.stream()
+									.filter(time -> time.getId() == idTime)
+									.map(Time::getNome)
+									.findFirst()
+									.get();
+		}else{
+			throw new TimeNaoEncontradoException("Time não encontrado!");
+		}
 	}
 
 	@Desafio("buscarJogadoresDoTime")
