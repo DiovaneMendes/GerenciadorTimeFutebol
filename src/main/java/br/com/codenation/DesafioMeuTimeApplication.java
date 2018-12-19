@@ -2,9 +2,10 @@ package br.com.codenation;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalLong;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import br.com.codenation.desafio.annotation.Desafio;
@@ -49,11 +50,7 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 
 	@Desafio("definirCapitao")
 	public void definirCapitao(Long idJogador) {
-		boolean validador = jogadorRepositorio.mostraLista()
-												.stream()
-												.anyMatch(j -> j.getId() == idJogador);
-
-		if(validador){
+		if(jogadorRepositorio.jogadorExistente(idJogador)){
 			jogadorRepositorio.mostraLista()
 								.stream()
 								.filter(jogador -> jogador.getCapitao() == true)
@@ -141,7 +138,7 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 
 			return jogadorRepositorio.mostraLista()
 										.stream()
-										.filter(jogador -> jogador.getNivelHabilidade() == maior)
+										.filter(jogador -> jogador.getIdTime() == idTime && jogador.getNivelHabilidade() == maior)
 										.mapToLong(Jogador::getId)
 										.boxed()
 										.findFirst()
@@ -154,12 +151,39 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 
 	@Desafio("buscarJogadorMaisVelho")
 	public Long buscarJogadorMaisVelho(Long idTime) {
-		throw new UnsupportedOperationException();
+
+		if(timeRepositorio.timeExistente(idTime)){
+			int maisVelho = jogadorRepositorio.mostraLista()
+											.stream()
+											.filter(jogador -> jogador.getIdTime() == idTime)
+											.mapToInt(jogador -> Period.between(jogador.getDataNascimento(), LocalDate.now()).getYears())
+											.max()
+											.getAsInt();
+
+			return jogadorRepositorio.mostraLista()
+										.stream()
+										.filter(jogador -> jogador.getIdTime() == idTime &&
+												Period.between(jogador.getDataNascimento(), LocalDate.now()).getYears() == maisVelho)
+										.mapToLong(Jogador::getId)
+										.boxed()
+										.findFirst()
+										.get();
+		}else{
+			throw new TimeNaoEncontradoException("Time não encontrado!");
+		}
 	}
 
 	@Desafio("buscarTimes")
 	public List<Long> buscarTimes() {
-		throw new UnsupportedOperationException();
+
+		if(!timeRepositorio.mostraLista().isEmpty()) {
+			return timeRepositorio.mostraLista()
+									.stream()
+									.mapToLong(Time::getId)
+									.boxed()
+									.collect(Collectors.toList());
+		}
+		return new ArrayList<>();
 	}
 
 	@Desafio("buscarJogadorMaiorSalario")

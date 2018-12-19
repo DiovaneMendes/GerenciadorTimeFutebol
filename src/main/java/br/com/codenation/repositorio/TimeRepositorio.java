@@ -24,7 +24,7 @@ public class TimeRepositorio {
 
     public boolean timeExistente(Long id){
         return times.stream()
-                    .anyMatch(j -> j.getId() == id);
+                    .anyMatch(time -> time.getId() == id);
     }
 
     public List<Time> mostraLista(){
