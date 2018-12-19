@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.OptionalLong;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import br.com.codenation.desafio.annotation.Desafio;
 import br.com.codenation.desafio.app.MeuTimeInterface;
@@ -115,12 +117,39 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 
 	@Desafio("buscarJogadoresDoTime")
 	public List<Long> buscarJogadoresDoTime(Long idTime) {
-		throw new UnsupportedOperationException();
+		if(timeRepositorio.timeExistente(idTime)){
+			return jogadorRepositorio.mostraLista()
+										.stream()
+										.filter(jogador -> jogador.getIdTime() == idTime)
+										.mapToLong(Jogador::getId)
+										.boxed()
+										.collect(Collectors.toList());
+		}else{
+			throw new TimeNaoEncontradoException("Time não encontrado!");
+		}
 	}
 
 	@Desafio("buscarMelhorJogadorDoTime")
 	public Long buscarMelhorJogadorDoTime(Long idTime) {
-		throw new UnsupportedOperationException();
+		if(timeRepositorio.timeExistente(idTime)){
+			int maior = jogadorRepositorio.mostraLista()
+											.stream()
+											.filter(jogador -> jogador.getIdTime() == idTime)
+											.mapToInt(Jogador::getNivelHabilidade)
+											.max()
+											.getAsInt();
+
+			return jogadorRepositorio.mostraLista()
+										.stream()
+										.filter(jogador -> jogador.getNivelHabilidade() == maior)
+										.mapToLong(Jogador::getId)
+										.boxed()
+										.findFirst()
+										.get();
+
+		}else{
+			throw new TimeNaoEncontradoException("Time não encontrado!");
+		}
 	}
 
 	@Desafio("buscarJogadorMaisVelho")
