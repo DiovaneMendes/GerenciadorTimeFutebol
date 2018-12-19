@@ -211,9 +211,3 @@ Neste desafio você aprenderá:
 ​Para este desafio você precisará :
 
 - Java 8 +
-
-Para instalar no MacOS, usando o HomeBrew basta executar:
-
-    brew cask install java
-
-dPara instalar no Linux e Windows confira os links na sessão de conteúdo

@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fbf321c-0e1b-46ae-b06a-0e9618cf09d6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codenation/DesafioMeuTimeApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codenation/DesafioMeuTimeApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codenation/model/Jogador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codenation/model/Jogador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codenation/model/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codenation/model/Time.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codenation/negocio/JogadorNegocio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codenation/negocio/JogadorNegocio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codenation/negocio/TimeNegocio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codenation/negocio/TimeNegocio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codenation/repositorio/JogadorRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codenation/repositorio/JogadorRepositorio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -26,14 +20,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/codenation/DesafioMeuTimeApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="79" column="26" selection-start-line="79" selection-start-column="26" selection-end-line="79" selection-end-column="26" />
+            <state relative-caret-position="60">
+              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="458">
+                <caret line="212" column="10" selection-start-line="212" selection-start-column="10" selection-end-line="212" selection-end-column="10" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -112,6 +118,7 @@
         <option value="$PROJECT_DIR$/src/main/java/br/com/codenation/negocio/TimeNegocio.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/codenation/model/Jogador.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/codenation/DesafioMeuTimeApplication.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -222,12 +229,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545232898234</updated>
-      <workItem from="1545232899886" duration="7049000" />
+      <workItem from="1545232899886" duration="7326000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7049000" />
+    <option name="totallyTimeSpent" value="7326000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="49" y="25" width="1317" height="743" extended-state="6" />
@@ -319,11 +326,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/codenation/DesafioMeuTimeApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="79" column="26" selection-start-line="79" selection-start-column="26" selection-end-line="79" selection-end-column="26" />
+        <state relative-caret-position="60">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="458">
+            <caret line="212" column="10" selection-start-line="212" selection-start-column="10" selection-end-line="212" selection-end-column="10" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
