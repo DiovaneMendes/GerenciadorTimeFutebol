@@ -67,14 +67,13 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 	@Desafio("buscarCapitaoDoTime")
 	public Long buscarCapitaoDoTime(Long idTime) {
 
-		OptionalLong idJogador;
-
 		if(timeRepositorio.timeExistente(idTime)){
-			idJogador = jogadorRepositorio.mostraLista()
-											.stream()
-											.filter(jogador -> jogador.getIdTime() == idTime && jogador.getCapitao() == true)
-											.mapToLong(Jogador::getId)
-											.findFirst();
+			OptionalLong idJogador = jogadorRepositorio.mostraLista()
+														.stream()
+														.filter(jogador -> jogador.getIdTime() == idTime &&
+																			jogador.getCapitao() == true)
+														.mapToLong(Jogador::getId)
+														.findFirst();
 
 			if(idJogador.isPresent()){
 				return idJogador.getAsLong();
