@@ -284,6 +284,23 @@ public class DesafioMeuTimeApplication implements MeuTimeInterface {
 
 	@Desafio("buscarCorCamisaTimeDeFora")
 	public String buscarCorCamisaTimeDeFora(Long timeDaCasa, Long timeDeFora) {
-		throw new UnsupportedOperationException();
+
+		Time timeCasa = timeRepositorio.mostraLista()
+										.stream()
+										.filter(time -> time.getId() == timeDaCasa)
+										.findFirst()
+										.get();
+
+		Time timeFora = timeRepositorio.mostraLista()
+										.stream()
+										.filter(time -> time.getId() == timeDeFora)
+										.findFirst()
+										.get();
+
+		if(timeCasa.getCorUniformePrincipal().equals(timeFora.getCorUniformePrincipal())){
+			return timeFora.getCorUniformeSecundario();
+		}
+
+		return timeFora.getCorUniformePrincipal();
 	}
 }
